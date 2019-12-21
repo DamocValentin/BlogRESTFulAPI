@@ -9,8 +9,9 @@ class Development(object):
     """
     DEBUG = True
     TESTING = False
-    SQLALCHEMY_DATABASE_URI = os.getenv('postgres://postgres:admin@localhost:5432/blog_api_db')
-    JWT_SECRET_KEY = os.getenv('my_secret_key')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+    JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')
 
 
 class Production(object):
@@ -19,8 +20,9 @@ class Production(object):
     """
     DEBUG = False
     TESTING = False
-    SQLALCHEMY_DATABASE_URI = os.getenv('postgres://postgres:admin@localhost:5432/blog_api_db')
-    JWT_SECRET_KEY = os.getenv('my_secret_key')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+    JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')
 
 
 app_config = {

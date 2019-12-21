@@ -1,8 +1,7 @@
 # src/models/UserModel.py
 from marshmallow import fields, Schema
 import datetime
-from . import db
-from . import bcrypt
+from . import db, bcrypt
 from .BlogpostModel import BlogpostSchema
 
 
@@ -58,17 +57,17 @@ class UserModel(db.Model):
         return UserModel.query.get(item_id)
 
     @staticmethod
-    def get_user_by_email(email):
-        return UserModel.query.get(email)
-
-    def __repr__(self):
-        return '<id {}>'.format(self.id)
+    def get_user_by_email(value):
+        return UserModel.query.filter_by(email=value).first()
 
     def __generate_hash(self, password):
         return bcrypt.generate_password_hash(password, rounds=10).decode("utf-8")
 
     def check_hash(self, password):
         return bcrypt.check_password_hash(self.password, password)
+
+    def __repr__(self):
+        return '<id {}>'.format(self.id)
 
 
 class UserSchema(Schema):
